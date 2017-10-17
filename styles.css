@@ -1,0 +1,14 @@
+.main {
+  display: flex;
+  background-color: blue;
+  flex-direction: row;
+  height: 100vh;
+}
+.list-grouping {
+  flex: 1;
+  background-color: #BFC9CA;
+}
+.task-list {
+  flex: 3;
+  background-color: #CAC0BF;
+}
