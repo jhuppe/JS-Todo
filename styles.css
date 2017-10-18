@@ -12,3 +12,16 @@
   flex: 3;
   background-color: #CAC0BF;
 }
+li {
+  list-style-type: none;
+  padding: 10px 0px;
+}
+.list-grouping h1 {
+  padding-left: 15px;
+}
+.list-item li {
+  background-color: #ffffff;
+  height: 35px;
+  width: 99%;
+  border: 1px solid #CAC0BF;
+}
