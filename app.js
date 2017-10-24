@@ -57,3 +57,15 @@ var todoList = {
     this.displayTodos();
   }
 };
+
+var displayTodosButton = document.getElementById('displayTodosButton');
+
+displayTodosButton.addEventListener('click', function() {
+  todoList.displayTodos();
+});
+
+var toggleAllTodos = document.getElementById('toggleAllTodos');
+
+toggleAllTodos.addEventListener('click', function() {
+  todoList.toggleAll();
+});
