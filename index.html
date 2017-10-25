@@ -9,10 +9,12 @@
   <body>
       <div>
         <h1>Todo List</h1>
-        <input id="addTodo" type="text">
-        <button id="displayTodosButton" type="button">Display Todos</button>
-        <button id="toggleAllTodos" type="button">Toggle All</button>
-
+        <button onclick="handlers.displayTodos()">Display Todos</button>
+        <button onclick="handlers.toggleAll()">Toggle All</button>
+      </div>
+      <div>
+        <button onclick="handlers.addTodo()">Add</button>
+        <input id="addTodoTextInput" type="text" placeholder="Enter new todo here">
       </div>
       <script type="text/javascript" src="app.js"></script>
   </body>
