@@ -12,10 +12,10 @@
   flex: 3;
   background-color: #CAC0BF;
 }
-li {
+/*li {
   list-style-type: none;
   padding: 10px 0px;
-}
+}*/
 .list-grouping h1 {
   padding-left: 15px;
 }
