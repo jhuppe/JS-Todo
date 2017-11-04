@@ -43,13 +43,18 @@ var handlers = {
     todoList.addTodo(addTodoTextInput.value);
     addTodoTextInput.value = '';
     view.displayTodos();
+
   },
-  changeTodo: function() {
+  changeTodo: function(position) {
+    // var listItem = this.parentNode;
+    // var editInput = listItem.querySelector('input[type=text]');
+    todos.todoText.contentEditable = 'true';
     var changeTodoPositionInput = document.getElementById('changeTodoPositionInput');
     var changeTodoTextInput = document.getElementById('changeTodoTextInput');
     todoList.changeTodo(changeTodoPositionInput.valueAsNumber, changeTodoTextInput.value);
     changeTodoPositionInput.value = '';
     changeTodoTextInput.value = '';
+
     view.displayTodos();
   },
   deleteTodo: function(position) {
@@ -72,22 +77,6 @@ var view = {
   displayTodos: function() {
     var todosUl = document.querySelector('ul');
     todosUl.innerHTML = '';
-    // for (var i = 0; i < todoList.todos.length; i++){
-    //   var todoLi = document.createElement('li');
-    //   var todo = todoList.todos[i];
-    //   var todoTextWithCompletion = '';
-    //
-    //   if (todo.completed === true) {
-    //     todoTextWithCompletion = '(x) ' + todo.todoText;
-    //   } else {
-    //     todoTextWithCompletion = '() ' + todo.todoText;
-    //   }
-    //
-    //   todoLi.id = i;
-    //   todoLi.textContent = todoTextWithCompletion;
-    //   todoLi.appendChild(this.createDeleteButton());
-    //   todosUl.appendChild(todoLi);
-    // }
 
     todoList.todos.forEach(function(todo, position){
       var todoLi = document.createElement('li');
@@ -101,6 +90,8 @@ var view = {
      todoLi.id = position;
      todoLi.textContent = todoTextWithCompletion;
      todoLi.appendChild(this.createDeleteButton());
+     todoLi.appendChild(this.createEditButton());
+     //  todoLi.appendChild(this.editTodoText());
      todosUl.appendChild(todoLi);
  }, this);
   },
@@ -109,6 +100,20 @@ var view = {
     deleteButton.textContent = 'x';
     deleteButton.className = 'deleteButton';
     return deleteButton;
+  },
+  createEditButton: function(){
+    var editButton = document.createElement('button');
+    editButton.textContent = 'Edit';
+    editButton.className = 'editButton';
+    return editButton;
+  },
+  editTodoText: function(){
+    var listItem = this.parentNode;
+    var label = document.createElement('label');
+    var editInput = document.createElement("input");
+    editInput.type = "text";
+    var label = listItem.querySelector('input[type=text]');
+
   },
   setUpEventListeners: function() {
     var todosUl = document.querySelector('ul');
@@ -120,6 +125,17 @@ var view = {
         handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
       }
     });
+
+    var editItem = document.querySelector('ul');
+
+    editItem.addEventListener('click', function(event) {
+      var elementClicked = event.target;
+      if (elementClicked.className === 'editButton') {
+        var containsClass = elementClicked.classList.add("editMode");
+        handlers.changeTodo()
+      }
+    })
+
   }
 };
 
