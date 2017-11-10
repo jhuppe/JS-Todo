@@ -1,27 +1,22 @@
-.main {
-  display: flex;
-  background-color: blue;
-  flex-direction: row;
-  height: 100vh;
-}
-.list-grouping {
-  flex: 1;
-  background-color: #BFC9CA;
-}
-.task-list {
-  flex: 3;
-  background-color: #CAC0BF;
-}
 li {
   list-style-type: none;
   padding: 10px 0px;
+  background-color: blue;
 }
-.list-grouping h1 {
-  padding-left: 15px;
-}
-.list-item li {
-  background-color: #ffffff;
-  height: 35px;
-  width: 99%;
-  border: 1px solid #CAC0BF;
+/*li > input[type="checkbox"] {
+  margin: 0 10px;
+  position: relative;
+  top: 15px;
+}*/
+input[type="text"] {
+  margin: 0;
+  font-size: 18px;
+  line-height: 18px;
+  height: 18px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 6px;
+  font-family: Lato, sans-serif;
+  color: #888;
 }

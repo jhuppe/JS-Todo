@@ -9,24 +9,22 @@
   <body>
       <div>
         <h1>Todo List</h1>
-        <button onclick="handlers.toggleAll()">Toggle All</button>
+        <!-- <button onclick="handlers.toggleAll()">Toggle All</button> -->
       </div>
-      <div>
+      <div class="newTodo">
+        <h2>Add Todo</h2>
         <button onclick="handlers.addTodo()">Add</button>
         <input id="addTodoTextInput" type="text" placeholder="Enter new todo here">
       </div>
-      <div>
-        <button onclick="handlers.changeTodo()">Change Todo</button>
-        <input id="changeTodoPositionInput" type="number">
-        <input id="changeTodoTextInput" type="text">
-      </div>
-      <div>
-        <button onclick="handlers.toggleCompleted()">Toggle Completed</button>
-        <input id="toggleCompletedPositionInput" type="number">
+      <div class="uncompletedTodo">
+        <h2>Todo</h2>
       </div>
       <div>
         <ul>
         </ul>
+      </div>
+      <div class="completedTodo">
+        <h2>Completed</h2>
       </div>
       <script type="text/javascript" src="app.js"></script>
   </body>

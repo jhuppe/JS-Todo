@@ -48,7 +48,7 @@ var handlers = {
   changeTodo: function(position) {
     // var listItem = this.parentNode;
     // var editInput = listItem.querySelector('input[type=text]');
-    todos.todoText.contentEditable = 'true';
+    // todos.todoText.contentEditable = 'true';
     var changeTodoPositionInput = document.getElementById('changeTodoPositionInput');
     var changeTodoTextInput = document.getElementById('changeTodoTextInput');
     todoList.changeTodo(changeTodoPositionInput.valueAsNumber, changeTodoTextInput.value);
@@ -80,20 +80,28 @@ var view = {
 
     todoList.todos.forEach(function(todo, position){
       var todoLi = document.createElement('li');
+      document.createElement('div').classList.add('todoText');
       var todoTextWithCompletion = '';
 
      if (todo.completed === true) {
        todoTextWithCompletion = '(x) ' + todo.todoText;
      } else {
-       todoTextWithCompletion = '() ' + todo.todoText;
+       todoTextWithCompletion = todo.todoText;
      }
      todoLi.id = position;
      todoLi.textContent = todoTextWithCompletion;
+     todoLi.appendChild(this.createCheckbox());
      todoLi.appendChild(this.createDeleteButton());
      todoLi.appendChild(this.createEditButton());
+
      //  todoLi.appendChild(this.editTodoText());
      todosUl.appendChild(todoLi);
  }, this);
+  },
+  createCheckbox: function(){
+    var todoItemCheckbox = document.createElement('input');
+    todoItemCheckbox.type = 'checkbox';
+    return todoItemCheckbox;
   },
   createDeleteButton: function(){
     var deleteButton = document.createElement('button');
@@ -132,7 +140,7 @@ var view = {
       var elementClicked = event.target;
       if (elementClicked.className === 'editButton') {
         var containsClass = elementClicked.classList.add("editMode");
-        handlers.changeTodo()
+        // handlers.changeTodo()
       }
     })
 
