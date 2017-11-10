@@ -91,8 +91,10 @@ var view = {
      todoLi.id = position;
      todoLi.textContent = todoTextWithCompletion;
      todoLi.appendChild(this.createCheckbox());
-     todoLi.appendChild(this.createDeleteButton());
+     todoLi.appendChild(this.createLabel());
      todoLi.appendChild(this.createEditButton());
+     todoLi.appendChild(this.createDeleteButton());
+
 
      //  todoLi.appendChild(this.editTodoText());
      todosUl.appendChild(todoLi);
@@ -103,11 +105,10 @@ var view = {
     todoItemCheckbox.type = 'checkbox';
     return todoItemCheckbox;
   },
-  createDeleteButton: function(){
-    var deleteButton = document.createElement('button');
-    deleteButton.textContent = 'x';
-    deleteButton.className = 'deleteButton';
-    return deleteButton;
+  createLabel: function(){
+    var label = document.createElement('label');
+    label.innerText = todoList.todoText;
+    return label;
   },
   createEditButton: function(){
     var editButton = document.createElement('button');
@@ -117,11 +118,16 @@ var view = {
   },
   editTodoText: function(){
     var listItem = this.parentNode;
-    var label = document.createElement('label');
-    var editInput = document.createElement("input");
+    // var label = document.createElement('label');
+    // var editInput = document.createElement("input");
     editInput.type = "text";
-    var label = listItem.querySelector('input[type=text]');
-
+    // var label = listItem.querySelector('input[type=text]');
+  },
+  createDeleteButton: function(){
+    var deleteButton = document.createElement('button');
+    deleteButton.textContent = 'x';
+    deleteButton.className = 'deleteButton';
+    return deleteButton;
   },
   setUpEventListeners: function() {
     var todosUl = document.querySelector('ul');
