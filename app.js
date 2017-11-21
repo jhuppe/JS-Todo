@@ -6,8 +6,8 @@ var todoList = {
       completed: false
     });
   },
-  changeTodo: function(position, todoText) {
-    this.todos[position].todoText = todoText;
+  editTodo: function(position, span) {
+    this.todos[position].span = span;
   },
   deleteTodo: function(position) {
     this.todos.splice(position, 1)
@@ -15,25 +15,6 @@ var todoList = {
   toggleCompleted: function(position) {
     var todo = this.todos[position];
     todo.completed = !this.completed;
-  },
-  toggleAll: function () {
-    var totalTodos = this.todos.length;
-    var completedTodos = 0;
-
-    this.todos.forEach(function(todo) {
-      if(todo.completed === true){
-        completedTodos++;
-      }
-    })
-
-    this.todos.forEach(function(todo){
-      if(todo.completed === true){
-        todo.completed = false;
-      } else {
-        todo.completed = true;
-      }
-
-    })
   }
 };
 
@@ -45,32 +26,36 @@ var handlers = {
     view.displayTodos();
 
   },
-  changeTodo: function(position) {
-    // var listItem = this.parentNode;
-    // var editInput = listItem.querySelector('input[type=text]');
-    // todos.todoText.contentEditable = 'true';
-    var changeTodoPositionInput = document.getElementById('changeTodoPositionInput');
-    var changeTodoTextInput = document.getElementById('changeTodoTextInput');
-    todoList.changeTodo(changeTodoPositionInput.valueAsNumber, changeTodoTextInput.value);
-    changeTodoPositionInput.value = '';
-    changeTodoTextInput.value = '';
+  editTodo: function(position) {
+    // var changeTodoPositionInput = document.getElementById('changeTodoPositionInput');
+    // var editTodoText = document.getElementById('editTodoText');
+    // todoList.editTodo(changeTodoPositionInput.valueAsNumber, changeTodoTextInput.value);
+    // changeTodoPositionInput.value = '';
+    // changeTodoTextInput.value = '';
+    // if ()
+    var todoItem = this.parentNode;
+    var editInput = todoItem.querySelector('input[type=text]');
+    var span = todoItem.querySelector('span');
+    var containsClass = todoItem.classList.contains('editMode')
 
-    view.displayTodos();
+    if (containsClass) {
+    span.innerText = editInput.value;
+} else {
+    editInput.value = span.innerText;
+}
+  // view.displayTodos();
   },
   deleteTodo: function(position) {
     todoList.deleteTodo(position);
     view.displayTodos();
   },
-  toggleCompleted: function() {
-    var toggleCompletedPositionInput = document.getElementById('toggleCompletedPositionInput');
-    todoList.toggleCompleted('toggleCompletedPositionInput.valueAsNumber');
-    toggleCompletedPositionInput.value = '';
-    view.displayTodos();
-  },
-  toggleAll: function() {
-    todoList.toggleAll();
-    view.displayTodos();
-  }
+  completeTodo: function() {
+    if (classList.contains(''))
+    // var toggleCompletedPositionInput = document.getElementById('toggleCompletedPositionInput');
+    // todoList.completetodo('toggleCompletedPositionInput.valueAsNumber');
+    // toggleCompletedPositionInput.value = '';
+    // view.displayTodos();
+  };
 };
 
 var view = {
@@ -80,8 +65,8 @@ var view = {
 
     todoList.todos.forEach(function(todo, position){
       var todoLi = document.createElement('li');
-      document.createElement('div').classList.add('todoText');
-      var todoTextWithCompletion = '';
+      document.createElement('div').classList.add('span');
+      var span = '';
 
      if (todo.completed === true) {
        todoTextWithCompletion = '(x) ' + todo.todoText;
@@ -89,9 +74,9 @@ var view = {
        todoTextWithCompletion = todo.todoText;
      }
      todoLi.id = position;
-     todoLi.textContent = todoTextWithCompletion;
+     todoLi.textContent = span;
      todoLi.appendChild(this.createCheckbox());
-     todoLi.appendChild(this.createLabel());
+     todoLi.appendChild(this.createSpan(position));
      todoLi.appendChild(this.createEditButton());
      todoLi.appendChild(this.createDeleteButton());
 
@@ -103,25 +88,19 @@ var view = {
   createCheckbox: function(){
     var todoItemCheckbox = document.createElement('input');
     todoItemCheckbox.type = 'checkbox';
+    todoItemCheckbox.className = 'todoItemCheckbox';
     return todoItemCheckbox;
   },
-  createLabel: function(){
-    var label = document.createElement('label');
-    label.innerText = todoList.todoText;
-    return label;
+  createSpan: function(position){
+    var span = document.createElement('span');
+    span.innerText = todoList.todos[position].todoText;
+    return span;
   },
   createEditButton: function(){
     var editButton = document.createElement('button');
     editButton.textContent = 'Edit';
     editButton.className = 'editButton';
     return editButton;
-  },
-  editTodoText: function(){
-    var listItem = this.parentNode;
-    // var label = document.createElement('label');
-    // var editInput = document.createElement("input");
-    editInput.type = "text";
-    // var label = listItem.querySelector('input[type=text]');
   },
   createDeleteButton: function(){
     var deleteButton = document.createElement('button');
@@ -145,12 +124,23 @@ var view = {
     editItem.addEventListener('click', function(event) {
       var elementClicked = event.target;
       if (elementClicked.className === 'editButton') {
-        var containsClass = elementClicked.classList.add("editMode");
+       elementClicked.parentElement.classList.add("editMode");
         // handlers.changeTodo()
       }
-    })
+    });
+
+    var completeItem = document.querySelector('todoItemCheckbox');
+
+    completeItem.addEventListener('click', function(event) {
+      var elementChecked = event.target;
+        if(elementChecked.className === 'todoItemCheckbox') {
+          elementChecked.parentElement.classList.add('completed');
+          handlers.completeTodo();
+        }
+    });
+
 
   }
 };
 
-view.setUpEventListeners();
+// view.setUpEventListeners();

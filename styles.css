@@ -3,6 +3,7 @@ li {
   padding: 10px;
   background-color: #FFF8DC;
   border: 2px solid white;
+  font-size: 18px;
 }
 li > input[type="checkbox"] {
   margin: 0 10px;
@@ -19,4 +20,8 @@ input[type="text"] {
   border-radius: 6px;
   font-family: Lato, sans-serif;
   color: #888;
+}
+
+input[type=checkbox]:checked + span {
+  text-decoration: line-through;
 }
