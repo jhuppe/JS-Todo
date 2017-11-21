@@ -39,23 +39,24 @@ var handlers = {
     var containsClass = todoItem.classList.contains('editMode')
 
     if (containsClass) {
-    span.innerText = editInput.value;
-} else {
-    editInput.value = span.innerText;
-}
+      span.innerText = editInput.value;
+    }
+    else {
+      editInput.value = span.innerText;
+    }
   // view.displayTodos();
   },
   deleteTodo: function(position) {
     todoList.deleteTodo(position);
     view.displayTodos();
-  },
-  completeTodo: function() {
-    if (classList.contains(''))
-    // var toggleCompletedPositionInput = document.getElementById('toggleCompletedPositionInput');
-    // todoList.completetodo('toggleCompletedPositionInput.valueAsNumber');
-    // toggleCompletedPositionInput.value = '';
-    // view.displayTodos();
-  };
+  }
+  // completeTodo: function() {
+  //   if (classList.contains(''))
+  //   // var toggleCompletedPositionInput = document.getElementById('toggleCompletedPositionInput');
+  //   // todoList.completetodo('toggleCompletedPositionInput.valueAsNumber');
+  //   // toggleCompletedPositionInput.value = '';
+  //   // view.displayTodos();
+  // }
 };
 
 var view = {
@@ -89,6 +90,18 @@ var view = {
     var todoItemCheckbox = document.createElement('input');
     todoItemCheckbox.type = 'checkbox';
     todoItemCheckbox.className = 'todoItemCheckbox';
+
+
+    todoItemCheckbox.addEventListener('click', function(event) {
+      var elementChecked = event.target;
+        if(elementChecked.className !== 'completed') {
+          elementChecked.parentElement.classList.add('completed')
+        }
+        else {
+          elementChecked.parentElement.classList.remove('completed')
+        }
+      });
+
     return todoItemCheckbox;
   },
   createSpan: function(position){
@@ -129,18 +142,9 @@ var view = {
       }
     });
 
-    var completeItem = document.querySelector('todoItemCheckbox');
-
-    completeItem.addEventListener('click', function(event) {
-      var elementChecked = event.target;
-        if(elementChecked.className === 'todoItemCheckbox') {
-          elementChecked.parentElement.classList.add('completed');
-          handlers.completeTodo();
-        }
-    });
 
 
   }
 };
 
-// view.setUpEventListeners();
+view.setUpEventListeners();
