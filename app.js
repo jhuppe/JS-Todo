@@ -49,14 +49,26 @@ var handlers = {
   deleteTodo: function(position) {
     todoList.deleteTodo(position);
     view.displayTodos();
+  },
+  completeTodo: function() {
+    var elementChecked = event.target;
+    var completedClass = elementChecked.parentElement.classList;
+    var selectedTodo = elementChecked.parentElement;
+      if(elementChecked.className !== 'completed') {
+        completedClass.add('completed');
+        document.getElementById('completedTodos').appendChild(selectedTodo);
+      }
+      else {
+        completedClass.remove('completed');
+        document.getElementById('uncompletedTodos').appendChild(selectedTodo);
+      }
+
+
+    // var toggleCompletedPositionInput = document.getElementById('toggleCompletedPositionInput');
+    // todoList.completetodo('toggleCompletedPositionInput.valueAsNumber');
+    // toggleCompletedPositionInput.value = '';
+    // view.displayTodos();
   }
-  // completeTodo: function() {
-  //   if (classList.contains(''))
-  //   // var toggleCompletedPositionInput = document.getElementById('toggleCompletedPositionInput');
-  //   // todoList.completetodo('toggleCompletedPositionInput.valueAsNumber');
-  //   // toggleCompletedPositionInput.value = '';
-  //   // view.displayTodos();
-  // }
 };
 
 var view = {
@@ -80,9 +92,7 @@ var view = {
      todoLi.appendChild(this.createSpan(position));
      todoLi.appendChild(this.createEditButton());
      todoLi.appendChild(this.createDeleteButton());
-
-
-     //  todoLi.appendChild(this.editTodoText());
+     todoLi.appendChild(this.editTodoText());
      todosUl.appendChild(todoLi);
  }, this);
   },
@@ -93,13 +103,8 @@ var view = {
 
 
     todoItemCheckbox.addEventListener('click', function(event) {
-      var elementChecked = event.target;
-        if(elementChecked.className !== 'completed') {
-          elementChecked.parentElement.classList.add('completed')
-        }
-        else {
-          elementChecked.parentElement.classList.remove('completed')
-        }
+      handlers.completeTodo();
+
       });
 
     return todoItemCheckbox;
@@ -121,6 +126,8 @@ var view = {
     deleteButton.className = 'deleteButton';
     return deleteButton;
   },
+  editTodoText: function(){
+
   setUpEventListeners: function() {
     var todosUl = document.querySelector('ul');
 
