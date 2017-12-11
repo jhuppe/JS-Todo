@@ -26,25 +26,21 @@ var handlers = {
     view.displayTodos();
 
   },
-  editTodo: function(position) {
-    // var changeTodoPositionInput = document.getElementById('changeTodoPositionInput');
-    // var editTodoText = document.getElementById('editTodoText');
-    // todoList.editTodo(changeTodoPositionInput.valueAsNumber, changeTodoTextInput.value);
-    // changeTodoPositionInput.value = '';
-    // changeTodoTextInput.value = '';
-    // if ()
-    var todoItem = this.parentNode;
-    var editInput = todoItem.querySelector('input[type=text]');
-    var span = todoItem.querySelector('span');
-    var containsClass = todoItem.classList.contains('editMode')
+  editTodo: function() {
+    var elementSelected = event.target.parentElement;
+    console.log(elementSelected);
+    var editInput = elementSelected.querySelector('input[type=text]');
+    var span = elementSelected.querySelector('span');
+    var containsClass = elementSelected.classList.contains('editMode')
 
     if (containsClass) {
-      span.innerText = editInput.value;
+       span.innerText = editInput.value;
     }
     else {
-      editInput.value = span.innerText;
+         editInput.value = span.innerText;
     }
-  // view.displayTodos();
+  // elementSelected.classList.toggle('editMode');
+  //  view.displayTodos();
   },
   deleteTodo: function(position) {
     todoList.deleteTodo(position);
@@ -90,9 +86,9 @@ var view = {
      todoLi.textContent = span;
      todoLi.appendChild(this.createCheckbox());
      todoLi.appendChild(this.createSpan(position));
+     todoLi.appendChild(this.editTodoText(position));
      todoLi.appendChild(this.createEditButton());
      todoLi.appendChild(this.createDeleteButton());
-     todoLi.appendChild(this.editTodoText());
      todosUl.appendChild(todoLi);
  }, this);
   },
@@ -126,7 +122,12 @@ var view = {
     deleteButton.className = 'deleteButton';
     return deleteButton;
   },
-  editTodoText: function(){
+  editTodoText: function(position){
+    var editTodoText = document.createElement('input');
+    editTodoText.innerText = todoList.todos[position].todoText;
+    editTodoText.type = 'text';
+    return editTodoText;
+  },
 
   setUpEventListeners: function() {
     var todosUl = document.querySelector('ul');
@@ -144,9 +145,12 @@ var view = {
     editItem.addEventListener('click', function(event) {
       var elementClicked = event.target;
       if (elementClicked.className === 'editButton') {
-       elementClicked.parentElement.classList.add("editMode");
-        // handlers.changeTodo()
+       elementClicked.parentElement.classList.add("editMode")
+     }
+      else {
+        elementClicked.parentElement.classList.remove("editMode")
       }
+        handlers.editTodo()
     });
 
 

@@ -9,6 +9,7 @@ li > input[type="checkbox"] {
   margin: 0 10px;
   top: 15px;
 }
+
 input[type="text"] {
   margin: 0;
   font-size: 18px;
@@ -24,4 +25,16 @@ input[type="text"] {
 
 .completed {
   text-decoration: line-through;
+}
+
+ul li input[type=text] {
+  display:none;
+}
+
+ul li.editMode input[type=text] {
+  display:block;
+}
+
+ul li.editMode span {
+  display:none;
 }
