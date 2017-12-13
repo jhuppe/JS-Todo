@@ -48,22 +48,16 @@ var handlers = {
   },
   completeTodo: function() {
     var elementChecked = event.target;
-    var completedClass = elementChecked.parentElement.classList;
+    var todoClasses = elementChecked.parentElement.classList;
     var selectedTodo = elementChecked.parentElement;
-      if(elementChecked.className !== 'completed') {
-        completedClass.add('completed');
-        document.getElementById('completedTodos').appendChild(selectedTodo);
-      }
-      else {
-        completedClass.remove('completed');
+      if(todoClasses.contains('completed')){
+        todoClasses.remove('completed');
         document.getElementById('uncompletedTodos').appendChild(selectedTodo);
       }
-
-
-    // var toggleCompletedPositionInput = document.getElementById('toggleCompletedPositionInput');
-    // todoList.completetodo('toggleCompletedPositionInput.valueAsNumber');
-    // toggleCompletedPositionInput.value = '';
-    // view.displayTodos();
+      else {
+        todoClasses.add('completed');
+        document.getElementById('completedTodos').appendChild(selectedTodo);
+      }
   }
 };
 
@@ -149,6 +143,7 @@ var view = {
      }
       else {
         elementClicked.parentElement.classList.remove("editMode")
+        
       }
         handlers.editTodo()
     });

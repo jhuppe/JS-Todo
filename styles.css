@@ -38,3 +38,7 @@ ul li.editMode input[type=text] {
 ul li.editMode span {
   display:none;
 }
+
+span {
+  padding-right: 10px;
+}
